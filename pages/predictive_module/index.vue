@@ -9,45 +9,45 @@
         <v-layout row wrap class="py-4 px-5">
           <v-flex xs12 mb-2 px-4><span class="subtitle-1">Please choose: </span></v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select outlined label="Sex" color="teal" :items="sexItems" :item-text="sexItems.text"
+            <v-select v-model="student.sex" outlined label="Sex" color="teal" :items="sexItems" :item-text="sexItems.text"
                       :item-value="sexItems.value"></v-select>
           </v-flex>
 
           <v-flex xs4 mt-2 px-4>
-            <v-select outlined label="Address" color="teal" :items="addressItems" :item-text="addressItems.text"
+            <v-select v-model="student.address" outlined label="Address" color="teal" :items="addressItems" :item-text="addressItems.text"
                       :item-value="addressItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select outlined label="Family size" color="teal" :items="familyItems" :item-text="familyItems.text"
+            <v-select v-model="student.family" outlined label="Family size" color="teal" :items="familyItems" :item-text="familyItems.text"
                       :item-value="familyItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select outlined label="Parent's status" color="teal" :items="pstatusItems" :item-text="pstatusItems.text"
+            <v-select v-model="student.pstatus" outlined label="Parent's status" color="teal" :items="pstatusItems" :item-text="pstatusItems.text"
                       :item-value="pstatusItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select outlined label="Mother's education" color="teal" :items="meduItems" :item-text="meduItems.text"
+            <v-select v-model="student.medu" outlined label="Mother's education" color="teal" :items="meduItems" :item-text="meduItems.text"
                       :item-value="meduItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select outlined label="Fathers's education" color="teal" :items="feduItems" :item-text="feduItems.text"
+            <v-select v-model="student.fedu" outlined label="Fathers's education" color="teal" :items="feduItems" :item-text="feduItems.text"
                       :item-value="feduItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select outlined label="Mother's job" color="teal" :items="mjobItems" :item-text="mjobItems.text"
+            <v-select v-model="student.mjob" outlined label="Mother's job" color="teal" :items="mjobItems" :item-text="mjobItems.text"
                       :item-value="mjobItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select outlined label="Fathers's job" color="teal" :items="fjobItems" :item-text="fjobItems.text"
+            <v-select v-model="student.fjob" outlined label="Fathers's job" color="teal" :items="fjobItems" :item-text="fjobItems.text"
                       :item-value="fjobItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select outlined label="Home to school travel time" color="teal" :items="travelTimeItems"
+            <v-select v-model="student.travelTime" outlined label="Home to school travel time" color="teal" :items="travelTimeItems"
                       :item-text="travelTimeItems.text"
                       :item-value="travelTimeItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select outlined label="Weekly study time" color="teal" :items="studyTimeItems"
+            <v-select v-model="student.studyTime" outlined label="Weekly study time" color="teal" :items="studyTimeItems"
                       :item-text="studyTimeItems.text"
                       :item-value="studyTimeItems.value"></v-select>
           </v-flex>
@@ -56,6 +56,7 @@
           <v-flex xs12 mt-3 px-4><span class="subtitle-1">Please check if true: </span></v-flex>
           <v-flex xs4 px-4>
             <v-checkbox
+              v-model="student.activities"
               label="Extra-curricular activities"
               color="teal"
               hide-details
@@ -65,6 +66,7 @@
           </v-flex>
           <v-flex xs4 px-4>
             <v-checkbox
+              v-model="student.higher"
               label="Wants to take higher education"
               color="teal"
               hide-details
@@ -74,6 +76,7 @@
           </v-flex>
           <v-flex xs4 px-4>
             <v-checkbox
+              v-model="student.internet"
               label="Internet access at home"
               color="teal"
               hide-details
@@ -83,6 +86,7 @@
           </v-flex>
           <v-flex xs4 mt-2 px-4>
             <v-checkbox
+              v-model="student.romantic"
               label="With a romantic relationship"
               color="teal"
               hide-details
@@ -98,8 +102,10 @@
           <v-flex xs4 mt-2 px-4>
             <span>Age:</span>
             <v-slider
+              v-model="student.age"
               :tick-labels="ageItems"
-              :max="7"
+              min="15"
+              max="22"
               step="1"
               ticks="always"
               tick-size="5"
@@ -110,8 +116,10 @@
           <v-flex xs4 mt-2 px-4>
             <span>Free time after school:</span>
             <v-slider
+              v-model="student.freeTime"
               :tick-labels="freeTimeItems"
-              :max="4"
+              min="1"
+              max="5"
               step="1"
               ticks="always"
               tick-size="5"
@@ -123,8 +131,10 @@
           <v-flex xs4 mt-2 px-4>
             <span>Going out with friends:</span>
             <v-slider
+              v-model="student.goOut"
               :tick-labels="goOutItems"
-              :max="4"
+              min="1"
+              max="5"
               step="1"
               ticks="always"
               tick-size="5"
@@ -137,8 +147,10 @@
           <v-flex xs4 mt-2 px-4>
             <span>Workday alcohol consumption:</span>
             <v-slider
+              v-model="student.dalc"
               :tick-labels="dalcItems"
-              :max="4"
+              min="1"
+              max="5"
               step="1"
               ticks="always"
               tick-size="5"
@@ -150,6 +162,7 @@
           <v-flex xs4 mt-2 px-4>
             <span>Weekend alcohol consumption:</span>
             <v-slider
+              v-model="student.walc"
               :tick-labels="walcItems"
               :max="4"
               step="1"
@@ -163,12 +176,13 @@
           <v-flex xs4 mt-2 px-4>
             <span>Number of school absences:</span>
             <v-slider
+              v-model="student.absences"
               min="0"
               max="93"
               color="teal"
               thumb-color="teal"
               track-color="grey"
-              thumb-label="true"
+              thumb-label
             ></v-slider>
           </v-flex>
           <v-flex xs4 py-2 px-4></v-flex>
@@ -189,6 +203,28 @@
     export default {
         data() {
             return {
+                student: {
+                  sex: "",
+                  age: null,
+                  address: "",
+                  family: "",
+                  pstatus: "",
+                  medu: "",
+                  fedu: "",
+                  mjob: "",
+                  fjob: "",
+                  travelTime: null,
+                  studyTime: null,
+                  activities: "no",
+                  higher: "no",
+                  internet: "no",
+                  romantic: "no",
+                  freeTime: null,
+                  goOut: null,
+                  dalc: null,
+                  walc: null,
+                  absences: null
+                },
                 sexItems: [{value: "F", text: "Female"}, {value: "M", text: "Male"}],
                 ageItems: [15, 16, 17, 18, 19, 20, 21, 22],
                 addressItems: [{value: "U", text: "Urban"}, {value: "R", text: "Rural"}],
