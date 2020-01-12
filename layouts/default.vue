@@ -41,17 +41,11 @@
         <nuxt/>
       </v-container>
     </v-content>
-    <!--v-footer
-      :fixed="fixed"
-      app
-    >
-      <span>&copy; 2020</span>
-    </v-footer-->
   </v-app>
 </template>
 
 <script>
-  import jsCookie from"js-cookie";
+    import jsCookie from "js-cookie";
 
     export default {
         data() {
@@ -72,18 +66,17 @@
                 ],
                 miniVariant: false,
                 right: true,
-                rightDrawer: false,
-                title: 'Vuetify.js'
+                rightDrawer: false
             }
         },
 
         methods: {
             async logOut() {
-                try{
+                try {
                     await this.$store.commit('saveLoginData', {token: null});
                     jsCookie.set("token", '');
                     this.$router.push('/');
-                }catch{
+                } catch {
                     console.log("error")
                 }
             }
