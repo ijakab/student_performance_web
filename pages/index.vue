@@ -13,7 +13,7 @@
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="mr-2 mt-1 white--text" rounded depressed color="teal">login</v-btn>
+            <v-btn class="mr-2 mt-1 white--text" rounded depressed color="teal" @click="login">login</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -31,6 +31,12 @@
                     username: "",
                     password: ""
                 }
+            }
+        },
+
+        methods: {
+            login(){
+                this.$router.push('/predictive_module')
             }
         }
     }
