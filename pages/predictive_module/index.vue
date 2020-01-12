@@ -1,7 +1,9 @@
 <template>
   <v-container fluid>
     <v-card style="border-radius: 16px" elevation="5">
-      <v-card-title><span class="teal--text font-weight-bold headline">Student Information Form</span></v-card-title>
+      <v-card-title style="background-color: #009688">
+        <span class="white--text font-weight-bold headline">Student Information Form</span>
+      </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
         <v-layout row wrap class="py-4 px-5">
@@ -87,6 +89,7 @@
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
+        <v-spacer></v-spacer>
         <v-btn class="ma-3 white--text" rounded outlined color="teal" large>Reset</v-btn>
         <v-btn class="ma-3 white--text" rounded depressed color="teal" large>Predict</v-btn>
       </v-card-actions>
