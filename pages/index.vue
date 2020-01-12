@@ -23,7 +23,12 @@
 
 
 <script>
+    import jsCookie from "js-cookie";
+    import {mapGetters} from 'vuex'
+    import env from "@/env.js"
+
     export default {
+        middleware: "loggedIn",
         layout: 'empty',
         data() {
             return {
@@ -35,8 +40,16 @@
         },
 
         methods: {
-            login(){
-                this.$router.push('/predictive_module')
+            async login() {
+                let {$axios, user} = this;
+                try {
+                    let {data} = await $axios.post(env.env.apiUrl+'auth/login', user);
+                    this.$store.commit('saveLoginData', {token: data.data.token, refreshToken: data.data.refreshToken});
+                    jsCookie.set("token", data.data.token);
+                    this.$router.push('/predictive_module');
+                } catch (err) {
+                    console.log(err)
+                }
             }
         }
     }

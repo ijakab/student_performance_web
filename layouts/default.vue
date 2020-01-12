@@ -20,7 +20,7 @@
             <v-icon color="white">{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title class="white--text font-weight-bold" v-text="item.title" />
+            <v-list-item-title class="white--text font-weight-bold" v-text="item.title"/>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -34,11 +34,11 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="white--text"/>
       <span class="pl-5 title white--text">Student Performance</span>
       <v-spacer></v-spacer>
-      <v-btn outlined rounded color="white">log out</v-btn>
+      <v-btn outlined rounded color="white" @click="logOut">log out</v-btn>
     </v-app-bar>
     <v-content>
       <v-container>
-        <nuxt />
+        <nuxt/>
       </v-container>
     </v-content>
     <!--v-footer
@@ -51,28 +51,42 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'dashboard',
-          title: 'Admin panel',
+  import jsCookie from"js-cookie";
+
+    export default {
+        data() {
+            return {
+                clipped: false,
+                drawer: false,
+                fixed: false,
+                items: [
+                    {
+                        icon: 'dashboard',
+                        title: 'Admin panel',
+                    },
+                    {
+                        icon: 'device_hub',
+                        title: 'Predictive module',
+                        to: '/predictive_module'
+                    }
+                ],
+                miniVariant: false,
+                right: true,
+                rightDrawer: false,
+                title: 'Vuetify.js'
+            }
         },
-        {
-          icon: 'device_hub',
-          title: 'Predictive module',
-          to: '/predictive_module'
+
+        methods: {
+            async logOut() {
+                try{
+                    await this.$store.commit('saveLoginData', {token: null});
+                    jsCookie.set("token", '');
+                    this.$router.push('/');
+                }catch{
+                    console.log("error")
+                }
+            }
         }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
     }
-  }
-}
 </script>
