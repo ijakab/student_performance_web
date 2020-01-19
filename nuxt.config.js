@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
+const {env, server} = require('./env.js')
+
 export default {
   mode: 'universal',
   /*
@@ -34,6 +36,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '@/plugins/axios',
   ],
   /*
   ** Nuxt.js dev-modules
@@ -46,6 +49,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
   ],
   /*
   ** vuetify module configuration
@@ -70,6 +74,7 @@ export default {
   },
   //Axios
   axios: {
+    baseURL: env.apiUrl
     // proxyHeaders: false
   },
   /*

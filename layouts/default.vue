@@ -56,7 +56,8 @@
                 items: [
                     {
                         icon: 'dashboard',
-                        title: 'Admin panel',
+                        title: 'Dashboard',
+                        to: '/dashboard'
                     },
                     {
                         icon: 'device_hub',
@@ -75,6 +76,7 @@
                 try {
                     await this.$store.commit('saveLoginData', {token: null});
                     jsCookie.set("token", '');
+                    jsCookie.set("type", '');
                     this.$router.push('/');
                 } catch {
                     console.log("error")
