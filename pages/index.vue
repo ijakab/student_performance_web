@@ -8,7 +8,7 @@
           <v-divider></v-divider>
           <v-card-text>
             <v-text-field v-model="user.username" label="Username" color="teal"/>
-            <v-text-field v-model="user.password" label="Password" color="teal"/>
+            <v-text-field v-model="user.password" label="Password" color="teal" type="password"/>
           </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
