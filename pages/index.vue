@@ -47,7 +47,7 @@
                     this.$store.commit('saveLoginData', {token: data.data.token, refreshToken: data.data.refreshToken});
                     jsCookie.set("token", data.data.token);
                     jsCookie.set("type", data.data.user.role)
-                    this.$router.push('/predictive_module');
+                    this.$router.push('/dashboard');
                 } catch (err) {
                     console.log(err)
                 }

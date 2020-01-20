@@ -1,6 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
-const {env, server} = require('./env.js')
+const {env} = require('./env.js')
 
 export default {
   mode: 'universal',

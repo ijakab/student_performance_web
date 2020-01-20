@@ -24,9 +24,9 @@
                 </v-list-item-content>
                 <v-list-item-action>
                   <v-flex xs12>
-                    <v-icon v-if="type=='admin'">device_hub</v-icon>
-                    <v-icon>edit</v-icon>
-                    <v-icon @click="openConfirmDialog(user.id)">delete</v-icon>
+                    <v-icon v-if="type=='admin'" class="px-1">device_hub</v-icon>
+                    <v-icon @click="openEdit(user.id)" class="px-1">edit</v-icon>
+                    <v-icon @click="openConfirmDialog(user.id)" class="px-1">delete</v-icon>
                   </v-flex>
 
                 </v-list-item-action>
@@ -96,6 +96,11 @@
                 }catch(err){
                     console.log(err)
                 }
+            },
+
+            openEdit(id){
+                localStorage.setItem("editId", id)
+                this.$router.push("/dashboard/edit")
             }
         }
     }
