@@ -45,6 +45,7 @@
 
 
 <script>
+  import Swal from 'sweetalert2'
     export default {
         data() {
             return {
@@ -57,7 +58,6 @@
 
 
         async mounted(){
-
             let id=localStorage.getItem("editId")
             this.id=id;
             let res = await this.$axios.get("user/get/"+id)
@@ -75,9 +75,23 @@
                             firstname: this.user.firstname,
                             lastname: this.user.lastname
                         })
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'User updated!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         this.$router.push('/dashboard');
                     }catch(err){
                         console.log(err)
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Upsss... Something went wrong!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     }
                 }
                 else{
@@ -91,8 +105,22 @@
                             password: this.password
                         })
                         this.$router.push('/dashboard');
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'User updated!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     }catch(err){
                         console.log(err)
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Upsss... Something went wrong!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     }
                 }
             }

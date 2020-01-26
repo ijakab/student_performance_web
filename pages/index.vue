@@ -26,6 +26,7 @@
     import jsCookie from "js-cookie";
     import {mapGetters} from 'vuex'
     import env from "@/env.js"
+    import Swal from 'sweetalert2'
 
     export default {
         middleware: "loggedIn",
@@ -48,8 +49,22 @@
                     jsCookie.set("token", data.data.token);
                     jsCookie.set("type", data.data.user.role)
                     this.$router.push('/dashboard');
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'info',
+                        title: 'Wellcome!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 } catch (err) {
                     console.log(err)
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Upsss... Something went wrong!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
             }
         }

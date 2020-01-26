@@ -21,7 +21,7 @@ export const getters = {
 };
 
 export const actions = {
-  async getUsers({commit}, {page, filter}) {
+  async getUsers({commit}, {page}) {
     let {data} = await this.$axios.post(`user/filter?page=${page}`);
     commit('updateUsers', data.data.data);
     let pagination={

@@ -46,6 +46,7 @@
 
 <script>
     import jsCookie from "js-cookie";
+    import Swal from 'sweetalert2'
 
     export default {
         data() {
@@ -59,11 +60,6 @@
                         title: 'Dashboard',
                         to: '/dashboard'
                     },
-                    {
-                        icon: 'device_hub',
-                        title: 'Predictive module',
-                        to: '/predictive_module'
-                    }
                 ],
                 miniVariant: false,
                 right: true,
@@ -75,11 +71,25 @@
             async logOut() {
                 try {
                     await this.$store.commit('saveLoginData', {token: null});
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'info',
+                        title: 'Logged out !',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     jsCookie.set("token", '');
                     jsCookie.set("type", '');
                     this.$router.push('/');
                 } catch {
                     console.log("error")
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Upsss... Something went wrong!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
             }
         }

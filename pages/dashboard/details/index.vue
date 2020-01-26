@@ -9,45 +9,55 @@
         <v-layout row wrap class="py-4 px-5">
           <v-flex xs12 mb-2 px-4><span class="subtitle-1">Please choose: </span></v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select v-model="student.sex" outlined label="Sex" color="teal" :items="sexItems" :item-text="sexItems.text"
+            <v-select v-model="student.details.sex" outlined label="Sex" color="teal" :items="sexItems"
+                      :item-text="sexItems.text"
                       :item-value="sexItems.value"></v-select>
           </v-flex>
 
           <v-flex xs4 mt-2 px-4>
-            <v-select v-model="student.address" outlined label="Address" color="teal" :items="addressItems" :item-text="addressItems.text"
+            <v-select v-model="student.details.address" outlined label="Address" color="teal" :items="addressItems"
+                      :item-text="addressItems.text"
                       :item-value="addressItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select v-model="student.family" outlined label="Family size" color="teal" :items="familyItems" :item-text="familyItems.text"
+            <v-select v-model="student.details.famsize" outlined label="Family size" color="teal" :items="familyItems"
+                      :item-text="familyItems.text"
                       :item-value="familyItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select v-model="student.pstatus" outlined label="Parent's status" color="teal" :items="pstatusItems" :item-text="pstatusItems.text"
+            <v-select v-model="student.details.Pstatus" outlined label="Parent's status" color="teal"
+                      :items="pstatusItems" :item-text="pstatusItems.text"
                       :item-value="pstatusItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select v-model="student.medu" outlined label="Mother's education" color="teal" :items="meduItems" :item-text="meduItems.text"
+            <v-select v-model="student.details.Medu" outlined label="Mother's education" color="teal" :items="meduItems"
+                      :item-text="meduItems.text"
                       :item-value="meduItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select v-model="student.fedu" outlined label="Fathers's education" color="teal" :items="feduItems" :item-text="feduItems.text"
+            <v-select v-model="student.details.Fedu" outlined label="Fathers's education" color="teal"
+                      :items="feduItems" :item-text="feduItems.text"
                       :item-value="feduItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select v-model="student.mjob" outlined label="Mother's job" color="teal" :items="mjobItems" :item-text="mjobItems.text"
+            <v-select v-model="student.details.Mjob" outlined label="Mother's job" color="teal" :items="mjobItems"
+                      :item-text="mjobItems.text"
                       :item-value="mjobItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select v-model="student.fjob" outlined label="Fathers's job" color="teal" :items="fjobItems" :item-text="fjobItems.text"
+            <v-select v-model="student.details.Fjob" outlined label="Fathers's job" color="teal" :items="fjobItems"
+                      :item-text="fjobItems.text"
                       :item-value="fjobItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select v-model="student.travelTime" outlined label="Home to school travel time" color="teal" :items="travelTimeItems"
+            <v-select v-model="student.details.traveltime" outlined label="Home to school travel time" color="teal"
+                      :items="travelTimeItems"
                       :item-text="travelTimeItems.text"
                       :item-value="travelTimeItems.value"></v-select>
           </v-flex>
           <v-flex xs4 mt-2 px-4>
-            <v-select v-model="student.studyTime" outlined label="Weekly study time" color="teal" :items="studyTimeItems"
+            <v-select v-model="student.details.studytime" outlined label="Weekly study time" color="teal"
+                      :items="studyTimeItems"
                       :item-text="studyTimeItems.text"
                       :item-value="studyTimeItems.value"></v-select>
           </v-flex>
@@ -56,7 +66,7 @@
           <v-flex xs12 mt-3 px-4><span class="subtitle-1">Please check if true: </span></v-flex>
           <v-flex xs4 px-4>
             <v-checkbox
-              v-model="student.activities"
+              v-model="student.details.activities"
               label="Extra-curricular activities"
               color="teal"
               hide-details
@@ -66,7 +76,7 @@
           </v-flex>
           <v-flex xs4 px-4>
             <v-checkbox
-              v-model="student.higher"
+              v-model="student.details.higher"
               label="Wants to take higher education"
               color="teal"
               hide-details
@@ -76,7 +86,7 @@
           </v-flex>
           <v-flex xs4 px-4>
             <v-checkbox
-              v-model="student.internet"
+              v-model="student.details.internet"
               label="Internet access at home"
               color="teal"
               hide-details
@@ -86,7 +96,7 @@
           </v-flex>
           <v-flex xs4 mt-2 px-4>
             <v-checkbox
-              v-model="student.romantic"
+              v-model="student.details.romantic"
               label="With a romantic relationship"
               color="teal"
               hide-details
@@ -102,7 +112,7 @@
           <v-flex xs4 mt-2 px-4>
             <span>Age:</span>
             <v-slider
-              v-model="student.age"
+              v-model="student.details.age"
               :tick-labels="ageItems"
               min="15"
               max="22"
@@ -116,7 +126,7 @@
           <v-flex xs4 mt-2 px-4>
             <span>Free time after school:</span>
             <v-slider
-              v-model="student.freeTime"
+              v-model="student.details.freetime"
               :tick-labels="freeTimeItems"
               min="1"
               max="5"
@@ -131,7 +141,7 @@
           <v-flex xs4 mt-2 px-4>
             <span>Going out with friends:</span>
             <v-slider
-              v-model="student.goOut"
+              v-model="student.details.goout"
               :tick-labels="goOutItems"
               min="1"
               max="5"
@@ -147,7 +157,7 @@
           <v-flex xs4 mt-2 px-4>
             <span>Workday alcohol consumption:</span>
             <v-slider
-              v-model="student.dalc"
+              v-model="student.details.Dalc"
               :tick-labels="dalcItems"
               min="1"
               max="5"
@@ -162,7 +172,7 @@
           <v-flex xs4 mt-2 px-4>
             <span>Weekend alcohol consumption:</span>
             <v-slider
-              v-model="student.walc"
+              v-model="student.details.Walc"
               :tick-labels="walcItems"
               :max="4"
               step="1"
@@ -176,7 +186,7 @@
           <v-flex xs4 mt-2 px-4>
             <span>Number of school absences:</span>
             <v-slider
-              v-model="student.absences"
+              v-model="student.details.absences"
               min="0"
               max="93"
               color="teal"
@@ -191,8 +201,9 @@
       <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn class="ma-3 white--text" rounded outlined color="teal" large>Reset</v-btn>
-        <v-btn class="ma-3 white--text" rounded depressed color="teal" large>Predict</v-btn>
+        <v-btn class="ma-3 white--text" rounded outlined color="teal" @click="$router.go(-1)">Back</v-btn>
+        <v-btn class="ma-3 white--text" rounded depressed color="teal" @click="addDetails(student.id)">Predict
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
@@ -200,31 +211,41 @@
 
 
 <script>
+  import Swal from 'sweetalert2'
     export default {
         middleware: "log",
         data() {
             return {
                 student: {
-                  sex: "",
-                  age: null,
-                  address: "",
-                  family: "",
-                  pstatus: "",
-                  medu: "",
-                  fedu: "",
-                  mjob: "",
-                  fjob: "",
-                  travelTime: null,
-                  studyTime: null,
-                  activities: "no",
-                  higher: "no",
-                  internet: "no",
-                  romantic: "no",
-                  freeTime: null,
-                  goOut: null,
-                  dalc: null,
-                  walc: null,
-                  absences: null
+                    id: null,
+                    username: "",
+                    email: "",
+                    firstname: "",
+                    lastname: "",
+                    role: "",
+                    created_at: "",
+                    details: {
+                        sex: "",
+                        age: null,
+                        address: "",
+                        famsize: "",
+                        Pstatus: "",
+                        Medu: "",
+                        Fedu: "",
+                        Mjob: "",
+                        Fjob: "",
+                        traveltime: null,
+                        studytime: null,
+                        activities: "no",
+                        higher: "no",
+                        internet: "no",
+                        romantic: "no",
+                        freetime: null,
+                        goout: null,
+                        Dalc: null,
+                        Walc: null,
+                        absences: null
+                    }
                 },
                 sexItems: [{value: "F", text: "Female"}, {value: "M", text: "Male"}],
                 ageItems: [15, 16, 17, 18, 19, 20, 21, 22],
@@ -291,6 +312,60 @@
                 goOutItems: [1, 2, 3, 4, 5],
                 dalcItems: [1, 2, 3, 4, 5],
                 walcItems: [1, 2, 3, 4, 5],
+            }
+        },
+
+        async mounted() {
+            let id = localStorage.getItem("detailsId")
+            this.id = id;
+            let res = await this.$axios.get("user/get/" + id)
+            this.student = res.data.data
+        },
+
+        methods: {
+            async addDetails(id) {
+                try {
+                    let res = await this.$axios.post(`/user/addDetails/${id}`,
+                        {
+                            sex: this.student.details.sex,
+                            age: this.student.details.age.toString(),
+                            address: this.student.details.address,
+                            famsize: this.student.details.famsize,
+                            Pstatus: this.student.details.Pstatus,
+                            Medu: this.student.details.Medu.toString(),
+                            Fedu: this.student.details.Fedu.toString(),
+                            Mjob: this.student.details.Mjob,
+                            Fjob: this.student.details.Fjob,
+                            traveltime: this.student.details.traveltime.toString(),
+                            studytime: this.student.details.studytime.toString(),
+                            activities: this.student.details.activities,
+                            higher: this.student.details.higher,
+                            internet: this.student.details.internet,
+                            romantic: this.student.details.romantic,
+                            freetime: this.student.details.freetime.toString(),
+                            goout: this.student.details.goout.toString(),
+                            Dalc: this.student.details.Dalc.toString(),
+                            Walc: this.student.details.Walc.toString(),
+                            absences: this.student.details.absences.toString()
+                        }
+                    )
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'User updated!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } catch (err) {
+                    console.log(err)
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Upsss... Something went wrong!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
             }
         }
     }

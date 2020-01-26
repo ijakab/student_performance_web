@@ -19,12 +19,16 @@
                   <v-avatar color="#E0F2F1"><span class="font-weight-black">{{user.firstname.charAt(0)}}{{user.lastname.charAt(0)}}</span></v-avatar>
                 </v-list-item-avatar>
                 <v-list-item-content>
-                  <v-list-item-title>{{user.firstname}} {{user.lastname}}</v-list-item-title>
+                  <v-list-item-title>{{user.firstname}} {{user.lastname}}
+                    <v-chip small class="white--text" color="red" v-if="user.role==='admin'">{{user.role}}</v-chip>
+                    <v-chip small class="white--text" color="blue" v-if="user.role==='teacher'">{{user.role}}</v-chip>
+                    <v-chip small class="white--text" color="green" v-if="user.role==='student'">{{user.role}}</v-chip>
+                  </v-list-item-title>
                   <v-list-item-subtitle>{{user.email}}</v-list-item-subtitle>
                 </v-list-item-content>
                 <v-list-item-action>
                   <v-flex xs12>
-                    <v-icon v-if="type=='admin'" class="px-1">device_hub</v-icon>
+                    <v-icon @click="openDetails(user.id)" v-show="user.role==='student'" class="px-1">device_hub</v-icon>
                     <v-icon @click="openEdit(user.id)" class="px-1">edit</v-icon>
                     <v-icon @click="openConfirmDialog(user.id)" class="px-1">delete</v-icon>
                   </v-flex>
@@ -35,7 +39,7 @@
           </v-card-text>
         </v-card>
         <v-pagination
-          v-model="pagination.page"
+          v-model="page"
           :length="pagination.lastPage"
           circle
           color="teal"
@@ -70,6 +74,7 @@
                 type: '',
                 confirmDialog: false,
                 deleteId: null,
+                page: 1
             }
         },
 
@@ -93,14 +98,39 @@
                     await this.$axios.delete(`user/delete/${this.deleteId}`)
                     this.confirmDialog=false
                     this.$store.dispatch("users/getUsers", {page: this.page})
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'User deleted!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }catch(err){
                     console.log(err)
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Upsss... Something went wrong!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
             },
 
             openEdit(id){
                 localStorage.setItem("editId", id)
                 this.$router.push("/dashboard/edit")
+            },
+
+            openDetails(id){
+                localStorage.setItem("detailsId", id)
+                this.$router.push("/dashboard/details")
+            }
+        },
+
+        watch:{
+            page(){
+                this.$store.dispatch("users/getUsers", {page: this.page})
             }
         }
     }

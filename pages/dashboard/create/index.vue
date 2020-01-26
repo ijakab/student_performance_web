@@ -45,6 +45,7 @@
 
 
 <script>
+  import Swal from'sweetalert2'
     export default {
         data() {
             return {
@@ -66,8 +67,22 @@
                 try{
                     await this.$axios.post('user/create', this.newUser)
                     this.$router.push('/dashboard');
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'User created!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }catch(err){
                     console.log(err)
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Upsss... Something went wrong!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
             }
         }
