@@ -8,15 +8,16 @@
             <v-flex xs6 text-right>
               <v-btn outlined rounded small color="white" nuxt :to="`dashboard/create`">Create new</v-btn>
             </v-flex>
-            <v-flex xs12 mt-3>
+            <!--v-flex xs12 mt-3>
               <v-text-field outlined hide-details style="background-color: white" color="white"></v-text-field>
-            </v-flex>
+            </v-flex-->
           </v-card-title>
           <v-card-text>
             <v-list two-line v-for="user in users" :key="user.id">
-              <v-list-item>
+              <v-list-item nuxt link :to="`dashboard/${user.id}`">
                 <v-list-item-avatar size="64">
-                  <v-avatar color="#E0F2F1"><span class="font-weight-black">{{user.firstname.charAt(0)}}{{user.lastname.charAt(0)}}</span></v-avatar>
+                  <v-avatar color="#E0F2F1"><span class="font-weight-black">{{user.firstname.charAt(0)}}{{user.lastname.charAt(0)}}</span>
+                  </v-avatar>
                 </v-list-item-avatar>
                 <v-list-item-content>
                   <v-list-item-title>{{user.firstname}} {{user.lastname}}
@@ -28,9 +29,11 @@
                 </v-list-item-content>
                 <v-list-item-action>
                   <v-flex xs12>
-                    <v-icon @click="openDetails(user.id)" v-show="user.role==='student'" class="px-1">device_hub</v-icon>
-                    <v-icon @click="openEdit(user.id)" class="px-1">edit</v-icon>
-                    <v-icon @click="openConfirmDialog(user.id)" class="px-1">delete</v-icon>
+                    <v-icon @click.prevent="openDetails(user.id)" v-show="user.role==='student' && userType==='admin'"
+                            class="px-1">device_hub
+                    </v-icon>
+                    <v-icon @click.prevent="openEdit(user.id)" class="px-1">edit</v-icon>
+                    <v-icon @click.prevent="openConfirmDialog(user.id)" class="px-1">delete</v-icon>
                   </v-flex>
 
                 </v-list-item-action>
@@ -50,7 +53,8 @@
     <template>
       <v-dialog v-model="confirmDialog" width="450">
         <v-card style="border-radius: 8px">
-          <v-card-title style="background-color: #009688"><span class="white--text headline">Delete user</span></v-card-title>
+          <v-card-title style="background-color: #009688"><span class="white--text headline">Delete user</span>
+          </v-card-title>
           <v-card-text>Are you sure that you want to <b>delete</b> this user?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -66,37 +70,42 @@
 
 
 <script>
-  import {mapState} from 'vuex'
-  import jsCookie from 'js-cookie'
+    import {mapState} from 'vuex'
+    import jsCookie from 'js-cookie'
+    import Swal from 'sweetalert2'
+
     export default {
         data() {
             return {
-                type: '',
                 confirmDialog: false,
                 deleteId: null,
                 page: 1
             }
         },
 
-        mounted(){
+        mounted() {
             this.$store.dispatch("users/getUsers", {page: 1})
-            this.type=jsCookie.get("type")
+            this.type = jsCookie.get("type")
         },
 
-        computed:{
-            ...mapState("users", ["users", "pagination"])
+        computed: {
+            ...mapState("users", ["users", "pagination"]),
+
+            userType() {
+                return jsCookie.get('type')
+            }
         },
 
-        methods:{
-            openConfirmDialog(id){
-                this.deleteId=id;
-                this.confirmDialog=true;
+        methods: {
+            openConfirmDialog(id) {
+                this.deleteId = id;
+                this.confirmDialog = true;
             },
 
-            async deleteUser(){
-                try{
+            async deleteUser() {
+                try {
                     await this.$axios.delete(`user/delete/${this.deleteId}`)
-                    this.confirmDialog=false
+                    this.confirmDialog = false
                     this.$store.dispatch("users/getUsers", {page: this.page})
                     Swal.fire({
                         position: 'center',
@@ -105,7 +114,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     })
-                }catch(err){
+                } catch (err) {
                     console.log(err)
                     Swal.fire({
                         position: 'center',
@@ -117,19 +126,19 @@
                 }
             },
 
-            openEdit(id){
+            openEdit(id) {
                 localStorage.setItem("editId", id)
                 this.$router.push("/dashboard/edit")
             },
 
-            openDetails(id){
+            openDetails(id) {
                 localStorage.setItem("detailsId", id)
                 this.$router.push("/dashboard/details")
             }
         },
 
-        watch:{
-            page(){
+        watch: {
+            page() {
                 this.$store.dispatch("users/getUsers", {page: this.page})
             }
         }

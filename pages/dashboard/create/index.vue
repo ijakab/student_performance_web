@@ -4,14 +4,14 @@
       <v-flex xs12>
         <v-card style="border-radius: 16px">
           <v-card-title style="background-color: #009688">
-            <span class="headline white--text font-weight-bold">Create user</span>
+            <span class="headline white--text font-weight-bold">Create User</span>
           </v-card-title>
           <v-card-text>
             <v-layout row wrap>
-              <v-flex xs6 px-5  mt-5>
+              <v-flex xs6 px-5 mt-5>
                 <v-text-field outlined v-model="newUser.firstname" label="Firstname" color="teal"></v-text-field>
               </v-flex>
-              <v-flex xs6 px-5  mt-5>
+              <v-flex xs6 px-5 mt-5>
                 <v-text-field outlined v-model="newUser.lastname" label="Lastname" color="teal"></v-text-field>
               </v-flex>
               <v-flex xs6 px-5>
@@ -45,12 +45,13 @@
 
 
 <script>
-  import Swal from'sweetalert2'
+    import Swal from 'sweetalert2'
+
     export default {
         data() {
             return {
                 roles: ['admin', 'teacher', 'student'],
-                newUser:{
+                newUser: {
                     firstname: '',
                     lastname: '',
                     username: '',
@@ -62,9 +63,9 @@
         },
 
         methods: {
-            async createUser(){
-                this.newUser.password=this.newUser.password.toString()
-                try{
+            async createUser() {
+                this.newUser.password = this.newUser.password.toString()
+                try {
                     await this.$axios.post('user/create', this.newUser)
                     this.$router.push('/dashboard');
                     Swal.fire({
@@ -74,7 +75,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     })
-                }catch(err){
+                } catch (err) {
                     console.log(err)
                     Swal.fire({
                         position: 'center',

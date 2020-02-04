@@ -4,14 +4,14 @@
       <v-flex xs12>
         <v-card style="border-radius: 16px">
           <v-card-title style="background-color: #009688">
-            <span class="headline white--text font-weight-bold">Create user</span>
+            <span class="headline white--text font-weight-bold">Edit User</span>
           </v-card-title>
           <v-card-text>
             <v-layout row wrap>
-              <v-flex xs6 px-5  mt-5>
+              <v-flex xs6 px-5 mt-5>
                 <v-text-field outlined v-model="user.firstname" label="Firstname" color="teal"></v-text-field>
               </v-flex>
-              <v-flex xs6 px-5  mt-5>
+              <v-flex xs6 px-5 mt-5>
                 <v-text-field outlined v-model="user.lastname" label="Lastname" color="teal"></v-text-field>
               </v-flex>
               <v-flex xs6 px-5>
@@ -39,35 +39,51 @@
           </v-card-actions>
         </v-card>
       </v-flex>
+      <v-overlay v-model="loading">
+        <v-progress-circular indeterminate size="64"></v-progress-circular>
+      </v-overlay>
     </v-layout>
   </v-container>
 </template>
 
 
 <script>
-  import Swal from 'sweetalert2'
+    import Swal from 'sweetalert2'
+
     export default {
         data() {
             return {
                 roles: ['admin', 'teacher', 'student'],
                 user: {},
                 id: null,
-                password: ""
+                password: "",
+                loading: true,
             }
         },
 
-
-        async mounted(){
-            let id=localStorage.getItem("editId")
-            this.id=id;
-            let res = await this.$axios.get("user/get/"+id)
-            this.user=res.data.data
+        async mounted() {
+            let id = localStorage.getItem("editId")
+            this.id = id;
+            try {
+                let res = await this.$axios.get("user/get/" + id)
+                this.user = res.data.data
+            } catch (err) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Upsss... Something went wrong!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                this.$router.push("/dashboard")
+            }
+            this.loading = false;
         },
 
         methods: {
-            async editUser(){
-                if(this.password===""){
-                    try{
+            async editUser() {
+                if (this.password === "") {
+                    try {
                         await this.$axios.patch(`user/update/${this.id}`, {
                             username: this.user.username,
                             email: this.user.email,
@@ -83,7 +99,7 @@
                             timer: 1500
                         })
                         this.$router.push('/dashboard');
-                    }catch(err){
+                    } catch (err) {
                         console.log(err)
                         Swal.fire({
                             position: 'center',
@@ -93,9 +109,8 @@
                             timer: 1500
                         })
                     }
-                }
-                else{
-                    try{
+                } else {
+                    try {
                         await this.$axios.patch(`user/update/${this.id}`, {
                             username: this.user.username,
                             email: this.user.email,
@@ -112,7 +127,7 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
-                    }catch(err){
+                    } catch (err) {
                         console.log(err)
                         Swal.fire({
                             position: 'center',

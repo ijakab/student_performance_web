@@ -4,7 +4,6 @@ import jsCookie from "js-cookie";
 export const state = () => ({
   loginData: {
     token: null,
-    userType: null,
   },
 });
 

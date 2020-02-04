@@ -44,10 +44,10 @@
             async login() {
                 let {$axios, user} = this;
                 try {
-                    let {data} = await $axios.post(env.env.apiUrl+'auth/login', user);
-                    this.$store.commit('saveLoginData', {token: data.data.token, refreshToken: data.data.refreshToken});
+                    let {data} = await $axios.post(env.env.apiUrl + 'auth/login', user);
+                    this.$store.commit('saveLoginData', {token: data.data.token});
                     jsCookie.set("token", data.data.token);
-                    jsCookie.set("type", data.data.user.role)
+                    jsCookie.set("type", data.data.user.role);
                     this.$router.push('/dashboard');
                     Swal.fire({
                         position: 'center',

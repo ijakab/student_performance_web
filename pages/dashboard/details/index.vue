@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-card style="border-radius: 16px" elevation="5">
       <v-card-title style="background-color: #009688">
-        <span class="white--text font-weight-bold headline">Student Information Form</span>
+        <span class="white--text font-weight-bold headline">Student Details</span>
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
@@ -206,16 +206,21 @@
         </v-btn>
       </v-card-actions>
     </v-card>
+    <v-overlay v-model="loading">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
   </v-container>
 </template>
 
 
 <script>
-  import Swal from 'sweetalert2'
+    import Swal from 'sweetalert2'
+
     export default {
         middleware: "log",
         data() {
             return {
+                loading: true,
                 student: {
                     id: null,
                     username: "",
@@ -318,8 +323,20 @@
         async mounted() {
             let id = localStorage.getItem("detailsId")
             this.id = id;
-            let res = await this.$axios.get("user/get/" + id)
-            this.student = res.data.data
+            try {
+                let res = await this.$axios.get("user/get/" + id)
+                this.student = res.data.data
+            } catch (err) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Upsss... Something went wrong!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                this.$router.push("/dashboard")
+            }
+            this.loading = false;
         },
 
         methods: {
