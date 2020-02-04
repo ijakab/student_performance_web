@@ -17,7 +17,12 @@
               <v-flex xs6><span class="subtitle-2">Username:</span></v-flex>
               <v-flex xs6><span class="subtitle-2">Email:</span></v-flex>
               <v-flex xs6><span class="subtitle-1">{{user.username}}</span></v-flex>
-              <v-flex xs6><span class="subtitle-1">{{user.email}}</span></v-flex>
+              <v-flex xs6>
+                <span class="subtitle-1"> {{user.email}}</span>
+                <a :href="`mailto:` + user.email">
+                  <v-icon class="mb-1">mail</v-icon>
+                </a>
+              </v-flex>
               <v-flex xs12 py-4 v-if="user.role==='student'"></v-flex>
               <v-flex xs6 v-if="user.role==='student'"><span class="subtitle-2">Predicted performance:</span></v-flex>
               <v-flex xs6 v-if="user.role==='student'"></v-flex>
@@ -65,7 +70,5 @@
             }
             this.loading = false;
         },
-
-        methods: {}
     }
 </script>
