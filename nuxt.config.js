@@ -50,6 +50,7 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/moment'
   ],
   /*
   ** vuetify module configuration

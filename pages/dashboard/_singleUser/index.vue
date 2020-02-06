@@ -23,11 +23,22 @@
                   <v-icon class="mb-1">mail</v-icon>
                 </a>
               </v-flex>
-              <v-flex xs12 py-4 v-if="user.role==='student'"></v-flex>
-              <v-flex xs6 v-if="user.role==='student'"><span class="subtitle-2">Predicted performance:</span></v-flex>
-              <v-flex xs6 v-if="user.role==='student'"></v-flex>
-              <v-flex xs6 v-if="user.role==='student'"><span class="subtitle-1">{{user.details.G3}}</span></v-flex>
-              <v-flex xs6 v-if="user.role==='student'"></v-flex>
+              <v-flex xs12 py-4></v-flex>
+              <v-flex xs6><span class="subtitle-2">Registration date:</span></v-flex>
+              <v-flex xs6><span class="subtitle-2" v-if="user.role==='student'">Predicted performance:</span></v-flex>
+              <v-flex xs6><span class="subtitle-1">{{$moment(user.created_at).format('DD. MMMM YYYY')}}</span></v-flex>
+              <v-flex xs6><span class="subtitle-1" v-if="user.role==='student'">{{user.details.G3}}</span></v-flex>
+              <v-flex xs6></v-flex>
+              <v-flex xs6 pr-5>
+                <v-progress-linear
+                  v-if="user.role==='student'"
+                  class="mt-2"
+                  value="60"
+                  height="10"
+                  striped
+                  color="green"
+                ></v-progress-linear>
+              </v-flex>
             </v-layout>
           </v-card-text>
           <v-card-actions>

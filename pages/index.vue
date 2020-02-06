@@ -8,7 +8,9 @@
           <v-divider></v-divider>
           <v-card-text>
             <v-text-field v-model="user.username" label="Username" color="teal"/>
-            <v-text-field v-model="user.password" label="Password" color="teal" type="password"/>
+            <v-text-field v-model="user.password" label="Password" color="teal" type="password" :append-icon="passVis ? 'visibility_off' : 'visibility'"
+                          :append-icon-cb="() => (passVis = !passVis)"
+                          :type="passVis ? 'text' : 'password'" @click:append="passVis=!passVis"/>
           </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
@@ -33,6 +35,7 @@
         layout: 'empty',
         data() {
             return {
+                passVis: false,
                 user: {
                     username: "admin",
                     password: "ferit4321"
