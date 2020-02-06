@@ -8,14 +8,15 @@
           <v-divider></v-divider>
           <v-card-text>
             <v-text-field v-model="user.username" label="Username" color="teal"/>
-            <v-text-field v-model="user.password" label="Password" color="teal" type="password" :append-icon="passVis ? 'visibility_off' : 'visibility'"
+            <v-text-field v-model="user.password" label="Password" color="teal" type="password"
+                          :append-icon="passVis ? 'visibility_off' : 'visibility'"
                           :append-icon-cb="() => (passVis = !passVis)"
                           :type="passVis ? 'text' : 'password'" @click:append="passVis=!passVis"/>
           </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="mr-2 mt-1 white--text" rounded depressed color="teal" @click="login">login</v-btn>
+            <v-btn class="mr-1 mt-1 white--text" rounded depressed color="teal" @click="login">login</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
