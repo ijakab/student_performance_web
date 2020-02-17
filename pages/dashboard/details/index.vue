@@ -258,18 +258,18 @@
                 familyItems: [{value: "LE3", text: "Less or equal to 3"}, {value: "GT3", text: "Greater than 3"}],
                 pstatusItems: [{value: "T", text: "Living together"}, {value: "A", text: "Living apart"}],
                 meduItems: [
-                    {value: 0, text: "None"},
-                    {value: 1, text: "Primary education (4th grade)"},
-                    {value: 2, text: "5th to 9th grade"},
-                    {value: 3, text: "Secondary education"},
-                    {value: 4, text: "Higher education"},
+                    {value: "0", text: "None"},
+                    {value: "1", text: "Primary education (4th grade)"},
+                    {value: "2", text: "5th to 9th grade"},
+                    {value: "3", text: "Secondary education"},
+                    {value: "4", text: "Higher education"},
                 ],
                 feduItems: [
-                    {value: 0, text: "None"},
-                    {value: 1, text: "Primary education (4th grade)"},
-                    {value: 2, text: "5th to 9th grade"},
-                    {value: 3, text: "Secondary education"},
-                    {value: 4, text: "Higher education"},
+                    {value: "0", text: "None"},
+                    {value: "1", text: "Primary education (4th grade)"},
+                    {value: "2", text: "5th to 9th grade"},
+                    {value: "3", text: "Secondary education"},
+                    {value: "4", text: "Higher education"},
                 ],
                 mjobItems: [
                     {value: "teacher", text: "Teacher"},
@@ -286,16 +286,16 @@
                     {value: "other", text: "Other"},
                 ],
                 travelTimeItems: [
-                    {value: 1, text: "<15 min"},
-                    {value: 2, text: "15 to 30 min"},
-                    {value: 3, text: "30 to 60 min"},
-                    {value: 4, text: ">1 hour"},
+                    {value: "1", text: "<15 min"},
+                    {value: "2", text: "15 to 30 min"},
+                    {value: "3", text: "30 to 60 min"},
+                    {value: "4", text: ">1 hour"},
                 ],
                 studyTimeItems: [
-                    {value: 1, text: "<2 hours"},
-                    {value: 2, text: "2 to 5 hours"},
-                    {value: 3, text: "5 to 10 hours"},
-                    {value: 4, text: "10 hours"},
+                    {value: "1", text: "<2 hours"},
+                    {value: "2", text: "2 to 5 hours"},
+                    {value: "3", text: "5 to 10 hours"},
+                    {value: "4", text: "10 hours"},
                 ],
                 activitiesItems: [
                     {value: "yes", text: "Yes"},
@@ -349,12 +349,12 @@
                             address: this.student.details.address,
                             famsize: this.student.details.famsize,
                             Pstatus: this.student.details.Pstatus,
-                            Medu: this.student.details.Medu.toString(),
-                            Fedu: this.student.details.Fedu.toString(),
+                            Medu: this.student.details.Medu,
+                            Fedu: this.student.details.Fedu,
                             Mjob: this.student.details.Mjob,
                             Fjob: this.student.details.Fjob,
-                            traveltime: this.student.details.traveltime.toString(),
-                            studytime: this.student.details.studytime.toString(),
+                            traveltime: this.student.details.traveltime,
+                            studytime: this.student.details.studytime,
                             activities: this.student.details.activities,
                             higher: this.student.details.higher,
                             internet: this.student.details.internet,
@@ -374,7 +374,6 @@
                         timer: 1500
                     })
                 } catch (err) {
-                    console.log(err)
                     Swal.fire({
                         position: 'center',
                         icon: 'error',

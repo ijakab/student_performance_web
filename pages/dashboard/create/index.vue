@@ -26,10 +26,11 @@
                                 :rules="[rules.required, rules.email]"></v-text-field>
                 </v-flex>
                 <v-flex xs6 px-5>
-                  <v-text-field outlined v-model="newUser.password" label="Password" color="teal"></v-text-field>
+                  <v-select outlined :items="roles" v-model="newUser.role" label="Role" color="teal"></v-select>
                 </v-flex>
                 <v-flex xs6 px-5>
-                  <v-select outlined :items="roles" v-model="newUser.role" label="Role" color="teal"></v-select>
+                  <v-text-field outlined v-model="newUser.password" label="Password" color="teal"
+                                type="password"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-card-text>

@@ -11,7 +11,8 @@
             <v-text-field v-model="user.password" label="Password" color="teal" type="password"
                           :append-icon="passVis ? 'visibility_off' : 'visibility'"
                           :append-icon-cb="() => (passVis = !passVis)"
-                          :type="passVis ? 'text' : 'password'" @click:append="passVis=!passVis"/>
+                          :type="passVis ? 'text' : 'password'" @click:append="passVis=!passVis"
+                          @keydown.enter="login"/>
           </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
@@ -38,8 +39,8 @@
             return {
                 passVis: false,
                 user: {
-                    username: "admin",
-                    password: "ferit4321"
+                    username: "",
+                    password: ""
                 }
             }
         },

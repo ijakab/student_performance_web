@@ -27,15 +27,14 @@
               <v-flex xs6><span class="subtitle-2">Registration date:</span></v-flex>
               <v-flex xs6><span class="subtitle-2" v-if="user.role==='student'">Predicted performance:</span></v-flex>
               <v-flex xs6><span class="subtitle-1">{{$moment(user.created_at).format('DD. MMMM YYYY')}}</span></v-flex>
-              <v-flex xs6><span class="subtitle-1" v-if="user.role==='student'">{{user.details.G3}}</span></v-flex>
-              <v-flex xs6></v-flex>
               <v-flex xs6 pr-5>
                 <v-progress-linear
                   v-if="user.role==='student'"
                   class="mt-2"
-                  value="60"
+                  :value="performance"
                   height="10"
                   striped
+                  rounded
                   color="green"
                 ></v-progress-linear>
               </v-flex>
@@ -81,5 +80,11 @@
             }
             this.loading = false;
         },
+
+        computed: {
+            performance() {
+                return this.user.details.G3 * 100
+            }
+        }
     }
 </script>

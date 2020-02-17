@@ -36,5 +36,26 @@ export const actions = {
     pagination.lastPage = data.data.pagination.lastPage;
     commit('updatePagination', pagination);
   },
+  async filterUsers({commit}, {page, search}) {
+    const fil = [
+      {
+        "key": "username",
+        "value": search
+      }
+    ]
+    let {data} = await this.$axios.post(`user/filter?page=${page}`, {filters: fil})
+    commit('updateUsers', data.data.data);
+    let pagination = {
+      perPage: null,
+      page: null,
+      total: null,
+      lastPage: null
+    };
+    pagination.perPage = data.data.pagination.perPage;
+    pagination.page = data.data.pagination.page;
+    pagination.total = data.data.pagination.total;
+    pagination.lastPage = data.data.pagination.lastPage;
+    commit('updatePagination', pagination);
+  },
 };
 

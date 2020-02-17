@@ -6,11 +6,12 @@
           <v-card-title style="background-color: #009688" class="headline white--text font-weight-bold">
             <v-flex xs6><span>User list</span></v-flex>
             <v-flex xs6 text-right>
-              <v-btn outlined rounded small color="white" nuxt :to="`dashboard/create`">Create new</v-btn>
+              <v-btn outlined rounded small color="white" nuxt :to="`dashboard/create`" v-if="type!=='student'">Create new</v-btn>
             </v-flex>
-            <!--v-flex xs12 mt-3>
-              <v-text-field outlined hide-details style="background-color: white" color="white"></v-text-field>
-            </v-flex-->
+            <v-flex xs12 mt-3>
+              <v-text-field v-model="search" outlined hide-details class="white" color="teal" dense placeholder="Search by username"
+                            clearable></v-text-field>
+            </v-flex>
           </v-card-title>
           <v-card-text>
             <v-list two-line v-for="user in users" :key="user.id">
@@ -29,11 +30,11 @@
                 </v-list-item-content>
                 <v-list-item-action>
                   <v-flex xs12>
-                    <v-icon @click.prevent="openDetails(user.id)" v-show="user.role==='student' && userType==='admin'"
+                    <v-icon @click.prevent="openDetails(user.id)" v-show="user.role==='student' && type!=='student'"
                             class="px-1">device_hub
                     </v-icon>
-                    <v-icon @click.prevent="openEdit(user.id)" class="px-1">edit</v-icon>
-                    <v-icon @click.prevent="openConfirmDialog(user.id)" class="px-1">delete</v-icon>
+                    <v-icon @click.prevent="openEdit(user.id)" class="px-1" v-show="type!=='student'">edit</v-icon>
+                    <v-icon @click.prevent="openConfirmDialog(user.id)" class="px-1" v-show="type!=='student'">delete</v-icon>
                   </v-flex>
 
                 </v-list-item-action>
@@ -73,13 +74,16 @@
     import {mapState} from 'vuex'
     import jsCookie from 'js-cookie'
     import Swal from 'sweetalert2'
+    import debounce from "lodash/debounce"
 
     export default {
         data() {
             return {
                 confirmDialog: false,
                 deleteId: null,
-                page: 1
+                page: 1,
+                search: "",
+                type: ""
             }
         },
 
@@ -140,7 +144,15 @@
         watch: {
             page() {
                 this.$store.dispatch("users/getUsers", {page: this.page})
-            }
+            },
+            search: debounce(async function () {
+                if (this.search != "" && this.search) {
+                    this.page = 1;
+                    this.$store.dispatch("users/filterUsers", {page: this.page, search: this.search})
+                } else {
+                    this.$store.dispatch("users/getUsers", {page: this.page})
+                }
+            }, 500)
         }
     }
 </script>
