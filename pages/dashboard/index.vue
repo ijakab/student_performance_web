@@ -10,7 +10,7 @@
             </v-flex>
             <v-flex xs12 mt-3>
               <v-text-field v-model="search" outlined hide-details class="white" color="teal" dense placeholder="Search by username"
-                            clearable></v-text-field>
+                            clearable prepend-inner-icon="search"></v-text-field>
             </v-flex>
           </v-card-title>
           <v-card-text>
